@@ -1,0 +1,59 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1020"/>
+      <stop offset="1" stop-color="#132C4B"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#1E3A5F"/>
+      <stop offset="1" stop-color="#12263D"/>
+    </linearGradient>
+    <linearGradient id="route" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#6EE7FF"/>
+      <stop offset="1" stop-color="#7CFFB2"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="1040" cy="120" r="160" fill="#0F4C81" opacity="0.4"/>
+  <circle cx="190" cy="600" r="220" fill="#1A5F73" opacity="0.3"/>
+
+  <rect x="90" y="80" width="1100" height="560" rx="28" fill="url(#panel)" stroke="#4FA7D8" stroke-opacity="0.5"/>
+
+  <rect x="140" y="150" width="600" height="360" rx="22" fill="#0E1B2E" stroke="#2F6FA2"/>
+  <path d="M180 420L275 330L360 370L430 260L540 300L640 215" stroke="url(#route)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="180" cy="420" r="14" fill="#6EE7FF"/>
+  <circle cx="640" cy="215" r="18" fill="#7CFFB2"/>
+  <rect x="208" y="190" width="80" height="44" rx="10" fill="#0A6A83" fill-opacity="0.7"/>
+  <rect x="270" y="250" width="88" height="44" rx="10" fill="#0A6A83" fill-opacity="0.7"/>
+  <rect x="425" y="310" width="97" height="44" rx="10" fill="#0A6A83" fill-opacity="0.7"/>
+  <rect x="480" y="225" width="90" height="44" rx="10" fill="#0A6A83" fill-opacity="0.7"/>
+
+  <g>
+    <path d="M820 220H1100" stroke="#8ED7FF" stroke-opacity="0.6" stroke-width="2"/>
+    <path d="M820 270H1100" stroke="#8ED7FF" stroke-opacity="0.6" stroke-width="2"/>
+    <path d="M820 320H1100" stroke="#8ED7FF" stroke-opacity="0.6" stroke-width="2"/>
+    <path d="M820 370H1100" stroke="#8ED7FF" stroke-opacity="0.6" stroke-width="2"/>
+    <path d="M820 420H1035" stroke="#8ED7FF" stroke-opacity="0.6" stroke-width="2"/>
+
+    <text x="820" y="200" fill="#D6F3FF" font-family="Arial, sans-serif" font-size="28" font-weight="700">COEX Indoor Guide</text>
+    <text x="820" y="255" fill="#A4E9FF" font-family="Arial, sans-serif" font-size="56" font-weight="700">Live Demo</text>
+    <text x="820" y="330" fill="#DDEEF8" font-family="Arial, sans-serif" font-size="24">AI 기반 실내 길안내</text>
+    <text x="820" y="380" fill="#A5DFF5" font-family="Arial, sans-serif" font-size="22">Natural language + IMDF route intelligence</text>
+    <rect x="820" y="440" width="185" height="52" rx="12" fill="#4FD1B5"/>
+    <text x="856" y="474" fill="#06263A" font-family="Arial, sans-serif" font-size="22" font-weight="700">Open Demo</text>
+  </g>
+
+  <g opacity="0.9">
+    <rect x="120" y="510" width="200" height="72" rx="18" fill="#0C2238" stroke="#58A7D8"/>
+    <text x="145" y="555" fill="#EAF8FF" font-family="Arial, sans-serif" font-size="30" font-weight="700">3D HUD</text>
+  </g>
+  <g opacity="0.9">
+    <rect x="345" y="510" width="220" height="72" rx="18" fill="#0C2238" stroke="#58A7D8"/>
+    <text x="378" y="555" fill="#EAF8FF" font-family="Arial, sans-serif" font-size="30" font-weight="700">AI Guidance</text>
+  </g>
+  <g opacity="0.9">
+    <rect x="590" y="510" width="210" height="72" rx="18" fill="#0C2238" stroke="#58A7D8"/>
+    <text x="630" y="555" fill="#EAF8FF" font-family="Arial, sans-serif" font-size="30" font-weight="700">IMDF Map</text>
+  </g>
+</svg>

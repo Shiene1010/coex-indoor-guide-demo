@@ -1,6 +1,13 @@
 # 🧭 코엑스-파르나스 실내 길라잡이 AI (IMDF Live Demo)
 
+![썸네일](./thumbnail.svg)
+
 > **GPS가 닿지 않는 대형 복합 지하 공간에서 자연어 발화만으로 위치를 추론하고 실시간 이탈을 보정하는 대화형 실내 내비게이션 데모**
+
+## 🔗 프로젝트 링크
+- 배포 주소: https://coex-indoor-guide-demo.vercel.app
+- GitHub 저장소: https://github.com/Shiene1010/coex-indoor-guide-demo
+
 
 코엑스몰(B1)을 가로질러 **웨스틴 서울 파르나스(구 인터컨티넨탈 코엑스) 하모니 볼룸(AMD 행사장)**까지 이동하는 실전 시나리오를 기반으로 설계되었습니다. **Apple IMDF(Indoor Mapping Data Format)** 표준 공간 객체와 **한국어 네 마디 워드주소(`///층.랜드마크.지형물.행동지침`)**를 결합해 직관적인 3D 방향 HUD와 채팅형 길안내를 제공합니다.
 
