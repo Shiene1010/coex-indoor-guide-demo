@@ -355,6 +355,57 @@ body {
 }
 
 /* JSON 인스펙터 */
+.analytics-panel {
+  background: rgba(2, 6, 23, 0.8);
+  border-top: 1px solid #1e293b;
+  padding: 12px;
+}
+
+.analytics-header {
+  font-size: 12px;
+  font-weight: 700;
+  color: #bfdbfe;
+  margin-bottom: 8px;
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.metric-card {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.metric-label {
+  display: block;
+  font-size: 10px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.metric-card strong {
+  font-size: 18px;
+  color: #f8fafc;
+}
+
+.analytics-log {
+  margin-top: 10px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #cbd5e1;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 8px 10px;
+  min-height: 44px;
+}
+
 .json-inspector {
   background: #020617;
   padding: 8px 12px;

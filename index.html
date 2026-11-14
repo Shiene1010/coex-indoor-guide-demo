@@ -76,6 +76,25 @@
       <button onclick="handleUserSubmit()">전송</button>
     </footer>
 
+    <section class="analytics-panel">
+      <div class="analytics-header">📊 경로 분석 요약</div>
+      <div class="analytics-grid">
+        <div class="metric-card">
+          <span class="metric-label">이탈 감지</span>
+          <strong id="metric-offroute">0</strong>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">도착 성공</span>
+          <strong id="metric-arrival">0</strong>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">긴급 재탐색</span>
+          <strong id="metric-reroute">0</strong>
+        </div>
+      </div>
+      <div id="analytics-log" class="analytics-log">분석 로그가 아직 없습니다.</div>
+    </section>
+
     <!-- IMDF JSON 출력 인스펙터 (토글) -->
     <details class="json-inspector">
       <summary>🔍 실시간 AI 응답 & Apple IMDF JSON 데이터 보기</summary>

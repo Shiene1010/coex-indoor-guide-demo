@@ -5,6 +5,12 @@ let currentRouteState = {
   alertLevel: 'safe_guide',
   rerouteRequired: false
 };
+let analyticsState = {
+  offroute: 0,
+  arrival: 0,
+  reroute: 0,
+  log: []
+};
 
 // 초기화: IMDF 샘플 JSON 로드
 async function initApp() {
@@ -252,6 +258,31 @@ function appendMessage(sender, text, fourWord = '') {
 }
 
 // 사용자 메시지 처리
+function updateAnalyticsSummary() {
+  document.getElementById('metric-offroute').textContent = analyticsState.offroute;
+  document.getElementById('metric-arrival').textContent = analyticsState.arrival;
+  document.getElementById('metric-reroute').textContent = analyticsState.reroute;
+
+  const logArea = document.getElementById('analytics-log');
+  if (analyticsState.log.length === 0) {
+    logArea.textContent = '분석 로그가 아직 없습니다.';
+    return;
+  }
+
+  logArea.textContent = analyticsState.log
+    .slice(-4)
+    .map((entry) => `${entry.time} · ${entry.message}`)
+    .join('\n');
+}
+
+function logAnalytics(message) {
+  analyticsState.log.push({
+    time: new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),
+    message
+  });
+  updateAnalyticsSummary();
+}
+
 function buildPersonaReply(node, routeState, routePath, nextNodeInfo) {
   const rerouteMessage = routeState.rerouteRequired
     ? '🚨 경로 이탈이 감지되어 즉시 원래 경로로 재탐색합니다.'
@@ -286,6 +317,17 @@ function processQuery(text) {
   const nextNode = routePath.length > 1 ? routePath[1] : routePath[0];
   const nextNodeInfo = imdfData.nodes[nextNode] || node;
   const reply = buildPersonaReply(node, routeState, routePath, nextNodeInfo);
+
+  if (routeState.rerouteRequired) {
+    analyticsState.offroute += 1;
+    analyticsState.reroute += 1;
+    logAnalytics('이탈 감지: 재탐색 경로 생성');
+  }
+
+  if (resolvedNodeId === 'opn-westin-lobby') {
+    analyticsState.arrival += 1;
+    logAnalytics('목적지 도착: 웨스틴 로비 진입');
+  }
 
   setTimeout(() => {
     appendMessage('ai', reply, node.four_word);
