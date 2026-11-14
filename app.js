@@ -184,6 +184,16 @@ function updateHUD(nodeId) {
   const routeState = detectRouteDeviation(nodeId, currentRouteState && currentRouteState.lastUserText ? currentRouteState.lastUserText : '');
   const alertLevel = routeState.alertLevel || node.alert_level;
 
+  const routeMapNodes = document.querySelectorAll('.map-node');
+  const routeLabels = routePath.map((id) => imdfData.nodes[id]?.name || id);
+  document.getElementById('route-step-label').textContent = routeLabels.join(' → ');
+
+  routeMapNodes.forEach((mapNode) => {
+    const nodeIdValue = mapNode.dataset.node;
+    mapNode.classList.toggle('active', nodeIdValue === nodeId);
+    mapNode.classList.toggle('visited', routePath.includes(nodeIdValue));
+  });
+
   // 패널 스타일 변경
   const hudPanel = document.getElementById('hud-panel');
   hudPanel.className = `hud-panel ${alertLevel}`;

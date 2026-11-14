@@ -93,6 +93,88 @@ body {
   background: linear-gradient(135deg, #065f46, #059669);
 }
 
+.route-preview {
+  margin: 0 12px 12px;
+  padding: 12px 12px 10px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid #334155;
+  border-radius: 12px;
+}
+
+.route-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  color: #cbd5e1;
+  margin-bottom: 10px;
+}
+
+.route-header span:last-child {
+  color: #7dd3fc;
+  text-align: right;
+}
+
+.mini-map {
+  position: relative;
+  height: 72px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.8));
+  overflow: hidden;
+}
+
+.track-line {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 50%;
+  height: 4px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, rgba(96, 165, 250, 0.9), rgba(96, 165, 250, 0.2));
+  border-radius: 4px;
+}
+
+.map-node {
+  position: absolute;
+  top: 50%;
+  width: 72px;
+  height: 30px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(51, 65, 85, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  color: #e2e8f0;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+  padding: 0 8px;
+  transition: all 0.25s ease;
+}
+
+.map-node span {
+  line-height: 1.1;
+  display: inline-block;
+}
+
+.map-node[data-node="opn-sam-01"] { left: 18%; }
+.map-node[data-node="opn-central-starfield"] { left: 42%; }
+.map-node[data-node="unt-aquarium-entrance"] { left: 66%; }
+.map-node[data-node="opn-westin-lobby"] { left: 88%; }
+
+.map-node.active {
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.map-node.visited {
+  background: linear-gradient(135deg, #065f46, #34d399);
+  border-color: #86efac;
+}
+
 @keyframes pulseWarning {
   0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.6); }
   70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
