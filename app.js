@@ -75,11 +75,54 @@ function inferNodeFromText(text) {
   return 'opn-sam-01';
 }
 
+function getRouteGraph() {
+  if (!imdfData || !imdfData.route_graph) {
+    return {
+      'opn-sam-01': ['opn-central-starfield', 'opn-sam-03'],
+      'opn-sam-03': ['opn-sam-01'],
+      'opn-central-starfield': ['opn-sam-01', 'unt-aquarium-entrance'],
+      'unt-aquarium-entrance': ['opn-central-starfield', 'opn-westin-lobby'],
+      'opn-westin-lobby': ['unt-aquarium-entrance']
+    };
+  }
+
+  return imdfData.route_graph;
+}
+
+function findShortestPath(startNodeId, targetNodeId) {
+  const graph = getRouteGraph();
+  const queue = [[startNodeId]];
+  const visited = new Set([startNodeId]);
+
+  while (queue.length > 0) {
+    const path = queue.shift();
+    const currentNode = path[path.length - 1];
+
+    if (currentNode === targetNodeId) {
+      return path;
+    }
+
+    const neighbors = graph[currentNode] || [];
+    for (const neighbor of neighbors) {
+      if (!visited.has(neighbor)) {
+        visited.add(neighbor);
+        queue.push([...path, neighbor]);
+      }
+    }
+  }
+
+  return [startNodeId];
+}
+
 // 상단 3D HUD 및 하단 JSON 인스펙터 업데이트
 function updateHUD(nodeId) {
   if (!imdfData || !imdfData.nodes[nodeId]) return;
   const node = imdfData.nodes[nodeId];
   const level = imdfData.levels.find(l => l.id === node.level_id);
+  const destinationId = imdfData.destination_id || 'opn-westin-lobby';
+  const routePath = findShortestPath(nodeId, destinationId);
+  const nextNode = routePath.length > 1 ? routePath[1] : routePath[0];
+  const nextNodeInfo = imdfData.nodes[nextNode] || node;
 
   // 패널 스타일 변경
   const hudPanel = document.getElementById('hud-panel');
@@ -106,7 +149,10 @@ function updateHUD(nodeId) {
     user_persona: currentPersona === 'mak' ? '막해일' : '길라임',
     reroute_required: node.alert_level === 'off_route_warning',
     current_imdf_id: nodeId,
-    destination_id: 'dst-westin-harmony',
+    destination_id: destinationId,
+    route_path: routePath,
+    next_waypoint: nextNodeInfo.name,
+    next_waypoint_four_word: nextNodeInfo.four_word,
     four_word_address: node.four_word,
     hud_action: {
       target_level: node.level_id,
@@ -143,7 +189,15 @@ function processQuery(text) {
   const node = imdfData.nodes[nodeId];
   updateHUD(nodeId);
 
-  const reply = currentPersona === 'mak' ? node.guide_mak : node.guide_gil;
+  const routePath = findShortestPath(nodeId, imdfData.destination_id || 'opn-westin-lobby');
+  const nextNode = routePath.length > 1 ? routePath[1] : routePath[0];
+  const nextNodeInfo = imdfData.nodes[nextNode] || node;
+
+  const routeHint = `📍 경로상 다음 목적지는 ${nextNodeInfo.name}입니다. 현재 경로: ${routePath.join(' → ')}.`;
+  const reply = currentPersona === 'mak'
+    ? `${node.guide_mak} ${routeHint}`
+    : `${node.guide_gil} ${routeHint}`;
+
   setTimeout(() => {
     appendMessage('ai', reply, node.four_word);
   }, 300);

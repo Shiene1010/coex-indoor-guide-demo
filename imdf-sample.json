@@ -10,6 +10,14 @@
     { "id": "lvl-coex-b1", "ordinal": -1, "name": "코엑스몰 지하 1층 (B1)", "short_name": "B1" },
     { "id": "lvl-westin-1f", "ordinal": 1, "name": "웨스틴 서울 파르나스 로비 및 연회장층", "short_name": "1F/연회장" }
   ],
+  "route_graph": {
+    "opn-sam-01": ["opn-central-starfield", "opn-sam-03"],
+    "opn-sam-03": ["opn-sam-01"],
+    "opn-central-starfield": ["opn-sam-01", "unt-aquarium-entrance"],
+    "unt-aquarium-entrance": ["opn-central-starfield", "opn-westin-lobby"],
+    "opn-westin-lobby": ["unt-aquarium-entrance"]
+  },
+  "destination_id": "opn-westin-lobby",
   "nodes": {
     "opn-sam-01": {
       "feature_type": "opening",
