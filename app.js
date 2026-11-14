@@ -252,6 +252,21 @@ function appendMessage(sender, text, fourWord = '') {
 }
 
 // 사용자 메시지 처리
+function buildPersonaReply(node, routeState, routePath, nextNodeInfo) {
+  const rerouteMessage = routeState.rerouteRequired
+    ? '🚨 경로 이탈이 감지되어 즉시 원래 경로로 재탐색합니다.'
+    : '✅ 정상 경로를 유지하고 있습니다.';
+
+  const routeHint = `📍 경로상 다음 목적지는 ${nextNodeInfo.name}입니다. 현재 경로: ${routePath.join(' → ')}.`;
+
+  if (currentPersona === 'mak') {
+    return `${node.guide_mak} ${rerouteMessage} ${routeHint}`;
+  }
+
+  const shortModeSummary = `최단 경로 유지 중입니다. ${nextNodeInfo.name} 방향으로 이동하세요.`;
+  return `${node.guide_gil} ${shortModeSummary} ${routeHint}`;
+}
+
 function processQuery(text) {
   if (!text.trim()) return;
   appendMessage('user', text);
@@ -270,14 +285,7 @@ function processQuery(text) {
   const routePath = findShortestPath(resolvedNodeId, imdfData.destination_id || 'opn-westin-lobby');
   const nextNode = routePath.length > 1 ? routePath[1] : routePath[0];
   const nextNodeInfo = imdfData.nodes[nextNode] || node;
-
-  const routeHint = `📍 경로상 다음 목적지는 ${nextNodeInfo.name}입니다. 현재 경로: ${routePath.join(' → ')}.`;
-  const rerouteMessage = routeState.rerouteRequired
-    ? '🚨 경로 이탈이 감지되어 즉시 원래 경로로 재탐색합니다.'
-    : '✅ 정상 경로를 유지하고 있습니다.';
-  const reply = currentPersona === 'mak'
-    ? `${node.guide_mak} ${rerouteMessage} ${routeHint}`
-    : `${node.guide_gil} ${rerouteMessage} ${routeHint}`;
+  const reply = buildPersonaReply(node, routeState, routePath, nextNodeInfo);
 
   setTimeout(() => {
     appendMessage('ai', reply, node.four_word);
