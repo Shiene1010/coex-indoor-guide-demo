@@ -348,6 +348,32 @@ function setInputStatus(state, text) {
   }
 }
 
+function resetSession() {
+  const chatBox = document.getElementById('chat-box');
+  if (chatBox) chatBox.innerHTML = '';
+
+  const input = document.getElementById('user-input');
+  if (input) input.value = '';
+
+  currentRouteState = {
+    nodeId: 'opn-sam-01',
+    alertLevel: 'safe_guide',
+    rerouteRequired: false
+  };
+
+  analyticsState = {
+    offroute: 0,
+    arrival: 0,
+    reroute: 0,
+    log: []
+  };
+
+  updateAnalyticsSummary();
+  updateHUD('opn-sam-01');
+  setInputStatus('neutral', '대기');
+  appendMessage('ai', '새 세션이 시작되었습니다. 길라임 시나리오와 막해일 시나리오를 다시 비교해 볼 수 있습니다.');
+}
+
 function handleUserSubmit() {
   const input = document.getElementById('user-input');
   const text = input.value.trim();

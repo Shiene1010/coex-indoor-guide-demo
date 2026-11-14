@@ -15,9 +15,9 @@
         <h1>실내 길라잡이 AI</h1>
         <p class="subtitle">코엑스 → 웨스틴 파르나스</p>
       </div>
-      <div class="persona-switch" aria-label="안내 상황 선택">
-        <button id="btn-mak" class="persona-btn active" onclick="setPersona('mak')">회복형 안내</button>
-        <button id="btn-gil" class="persona-btn" onclick="setPersona('gil')">직진형 경로</button>
+      <div class="persona-switch" aria-label="안내 시나리오 선택">
+        <button id="btn-mak" class="persona-btn active" onclick="setPersona('mak')">막해일 시나리오</button>
+        <button id="btn-gil" class="persona-btn" onclick="setPersona('gil')">길라임 시나리오</button>
       </div>
     </header>
 
@@ -60,13 +60,13 @@
 
     <!-- 데모 시연용 빠른 발화 칩 -->
     <section class="quick-prompts">
-      <p class="quick-label">🎬 시연 시나리오 원클릭 테스트:</p>
+      <p class="quick-label">🎬 사용자 시나리오 비교 테스트:</p>
       <div class="chip-container">
-        <button class="chip" onclick="sendPreset('삼성역에서 들어왔는데 길 잃었어. 행사장 길 찾아줘')">삼성역 진입</button>
-        <button class="chip warning" onclick="sendPreset('파르나스 타워 쪽으로 와버렸어')">파르나스 오진입</button>
-        <button class="chip" onclick="sendPreset('별마당 도서관 앞이야')">별마당</button>
-        <button class="chip" onclick="sendPreset('아쿠아 입구까지 왔는데 어디로 가야 하지')">아쿠아</button>
-        <button class="chip success" onclick="sendPreset('파르나스 로비 앞까지 왔어')">호텔 도착</button>
+        <button class="chip" onclick="sendPreset('삼성역에서 들어왔는데 길 잃었어. 행사장 길 찾아줘')">길라임 직행</button>
+        <button class="chip warning" onclick="sendPreset('파르나스 타워 쪽으로 와버렸어')">막해일 오진입</button>
+        <button class="chip" onclick="sendPreset('별마당 도서관 앞이야')">별마당 기준점</button>
+        <button class="chip" onclick="sendPreset('아쿠아 입구까지 왔는데 어디로 가야 하지')">재진입 안내</button>
+        <button class="chip success" onclick="sendPreset('파르나스 로비 앞까지 왔어')">목적지 복귀</button>
       </div>
     </section>
 
@@ -78,6 +78,9 @@
       </div>
       <button id="submit-button" onclick="handleUserSubmit()">전송</button>
     </footer>
+    <div class="session-reset-wrap">
+      <button class="reset-button" onclick="resetSession()">새 세션 시작</button>
+    </div>
 
     <section class="analytics-panel">
       <div class="analytics-header">📊 경로 분석 요약</div>

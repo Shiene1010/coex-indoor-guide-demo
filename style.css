@@ -481,6 +481,21 @@ body {
   background: linear-gradient(135deg, var(--color-success-600), #34d399);
 }
 
+.session-reset-wrap {
+  padding: 0 12px 12px;
+}
+
+.reset-button {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.8);
+  color: #e2e8f0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .analytics-panel {
   margin: 0 12px 12px;
   padding: 12px;
