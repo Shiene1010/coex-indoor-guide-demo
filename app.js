@@ -27,20 +27,52 @@ function setPersona(persona) {
 }
 
 // 자연어 입력 의도 및 IMDF 노드 추론
+const LOCATION_PATTERNS = [
+  {
+    id: 'opn-sam-03',
+    keywords: ['파르나스 타워', '파르나스몰', '타워', '남측 파르나스', '파르나스 타워인데', '오진입']
+  },
+  {
+    id: 'opn-central-starfield',
+    keywords: ['별마당', '별마당 도서관', '도서관', '중앙광장', '11시', '보이드서가', '서가']
+  },
+  {
+    id: 'unt-aquarium-entrance',
+    keywords: ['아쿠아', '아쿠아리움', '수족관', '봉은사', '봉은사역', '아셈플라자']
+  },
+  {
+    id: 'opn-westin-lobby',
+    keywords: ['하모니 볼룸', '웨스틴', '웨스틴 서울 파르나스', '로비', '연회장', '행사장', '호텔']
+  },
+  {
+    id: 'opn-sam-01',
+    keywords: ['삼성역', '밀레니엄', '코엑스몰', '코엑스', '광장', '입구']
+  }
+];
+
+function normalizeQuery(text) {
+  return (text || '')
+    .toLowerCase()
+    .replace(/[\u2000-\u206F\u2E00-\u2E7F\\'\"`~!@#$%^&*()=+\[\]{};:,.<>/?\|]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function inferNodeFromText(text) {
-  if (text.includes('파르나스 타워') || text.includes('파르나스몰') || text.includes('타워인데')) {
-    return 'opn-sam-03';
+  const normalizedText = normalizeQuery(text);
+
+  for (const pattern of LOCATION_PATTERNS) {
+    const matched = pattern.keywords.some((keyword) => {
+      const normalizedKeyword = normalizeQuery(keyword);
+      return normalizedText.includes(normalizedKeyword);
+    });
+
+    if (matched) {
+      return pattern.id;
+    }
   }
-  if (text.includes('별마당') || text.includes('도서관')) {
-    return 'opn-central-starfield';
-  }
-  if (text.includes('아쿠아') || text.includes('수족관') || text.includes('봉은사')) {
-    return 'unt-aquarium-entrance';
-  }
-  if (text.includes('로비') || text.includes('호텔') || text.includes('웨스틴')) {
-    return 'opn-westin-lobby';
-  }
-  return 'opn-sam-01'; // 기본값: 삼성역 밀레니엄 광장 진입
+
+  return 'opn-sam-01';
 }
 
 // 상단 3D HUD 및 하단 JSON 인스펙터 업데이트
