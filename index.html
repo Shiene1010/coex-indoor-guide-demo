@@ -13,30 +13,30 @@
       <div class="title-group">
         <span class="badge-live">IMDF LIVE DEMO</span>
         <h1>실내 길라잡이 AI</h1>
-        <p class="subtitle">삼성역 → 웨스틴 서울 파르나스 (AMD 행사장)</p>
+        <p class="subtitle">코엑스 → 웨스틴 파르나스</p>
       </div>
-      <div class="persona-switch">
-        <button id="btn-mak" class="persona-btn active" onclick="setPersona('mak')">막해일 (이탈보정)</button>
-        <button id="btn-gil" class="persona-btn" onclick="setPersona('gil')">길라임 (최단주파)</button>
+      <div class="persona-switch" aria-label="안내 상황 선택">
+        <button id="btn-mak" class="persona-btn active" onclick="setPersona('mak')">회복형 안내</button>
+        <button id="btn-gil" class="persona-btn" onclick="setPersona('gil')">직진형 경로</button>
       </div>
     </header>
 
     <!-- 실시간 3D 방향 HUD 카드 -->
     <section id="hud-panel" class="hud-panel safe_guide">
       <div class="hud-top">
-        <span id="hud-level" class="hud-tag">B1 · 코엑스몰 지하 1층</span>
-        <span id="hud-status" class="hud-status-badge">정상 경로 안내 중</span>
+        <span id="hud-level" class="hud-tag">B1 · 코엑스</span>
+        <span id="hud-status" class="hud-status-badge">안내 중</span>
       </div>
 
       <div class="hud-main">
         <div class="compass-box">
           <div id="arrow-indicator" class="arrow-indicator">▲</div>
-          <span id="yaw-text" class="yaw-text">Yaw 28° · 직진</span>
+          <span id="yaw-text" class="yaw-text">28° · 직진</span>
         </div>
         <div class="location-info">
-          <div class="four-word-box" id="four-word-address">///지하삼성.광장개방.우상에스컬.일시직진</div>
-          <h2 id="current-node-name">밀레니엄 광장 입구 (삼성역 연결)</h2>
-          <p id="trap-warning" class="trap-text">⚠️ 우측 파르나스몰(opn-sam-03) 오진입 주의</p>
+          <div class="four-word-box" id="four-word-address">///지하삼성.광장개방.우상에스컬.직진</div>
+          <h2 id="current-node-name">밀레니엄 광장 입구</h2>
+          <p id="trap-warning" class="trap-text">⚠️ 파르나스몰 오진입 주의</p>
         </div>
       </div>
     </section>
@@ -62,18 +62,21 @@
     <section class="quick-prompts">
       <p class="quick-label">🎬 시연 시나리오 원클릭 테스트:</p>
       <div class="chip-container">
-        <button class="chip" onclick="sendPreset('막해일은 방금 삼성역에서 들어왔는데 길 잃었어. AMD 행사장 길 찾아줘')">1. 삼성역 진입</button>
-        <button class="chip warning" onclick="sendPreset('파르나스라서 와보니 파르나스 타워인데')">2. 파르나스 타워 오진입</button>
-        <button class="chip" onclick="sendPreset('별마당 도서관 앞이야')">3. 별마당 도서관</button>
-        <button class="chip" onclick="sendPreset('아쿠아 입구까지 왔는데 어디로 가야 하지')">4. 아쿠아리움 입구</button>
-        <button class="chip success" onclick="sendPreset('파르나스 로비 앞으로 나와버렸어 어쩌지')">5. 호텔 로비 도착</button>
+        <button class="chip" onclick="sendPreset('삼성역에서 들어왔는데 길 잃었어. 행사장 길 찾아줘')">삼성역 진입</button>
+        <button class="chip warning" onclick="sendPreset('파르나스 타워 쪽으로 와버렸어')">파르나스 오진입</button>
+        <button class="chip" onclick="sendPreset('별마당 도서관 앞이야')">별마당</button>
+        <button class="chip" onclick="sendPreset('아쿠아 입구까지 왔는데 어디로 가야 하지')">아쿠아</button>
+        <button class="chip success" onclick="sendPreset('파르나스 로비 앞까지 왔어')">호텔 도착</button>
       </div>
     </section>
 
     <!-- 사용자 직접 입력창 -->
     <footer class="chat-input-area">
-      <input type="text" id="user-input" placeholder="현재 보이는 간판이나 위치를 입력하세요..." onkeypress="handleKeyPress(event)" />
-      <button onclick="handleUserSubmit()">전송</button>
+      <div class="input-wrap">
+        <input type="text" id="user-input" placeholder="현재 보이는 간판이나 위치를 입력하세요..." onkeypress="handleKeyPress(event)" />
+        <span id="input-status" class="input-status neutral">대기</span>
+      </div>
+      <button id="submit-button" onclick="handleUserSubmit()">전송</button>
     </footer>
 
     <section class="analytics-panel">

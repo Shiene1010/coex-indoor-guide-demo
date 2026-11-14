@@ -1,5 +1,5 @@
 let imdfData = null;
-let currentPersona = 'mak'; // 'mak' (막해일) 또는 'gil' (길라임)
+let currentPersona = 'mak'; // 'mak' = 이탈 보정 케이스, 'gil' = 최단 경로 케이스
 let currentRouteState = {
   nodeId: 'opn-sam-01',
   alertLevel: 'safe_guide',
@@ -25,15 +25,15 @@ async function initApp() {
   }
 }
 
-// 페르소나 전환 (막해일 <-> 길라임)
+// 상황 전환: 이탈 보정 케이스 <-> 최단 경로 케이스
 function setPersona(persona) {
   currentPersona = persona;
   document.getElementById('btn-mak').classList.toggle('active', persona === 'mak');
   document.getElementById('btn-gil').classList.toggle('active', persona === 'gil');
 
   const msg = persona === 'mak'
-    ? '🔄 [막해일 모드] 길치 보호 및 이탈 실시간 재탐색 엔진이 활성화되었습니다.'
-    : '⚡ [길라임 모드] 최단 무결점 주파 경로(11분 직통) 모드로 전환되었습니다.';
+    ? '🔄 회복형 안내: 이탈 시 즉시 경로를 다시 잡아줍니다.'
+    : '⚡ 직진형 경로: 가장 짧은 루트로 빠르게 안내합니다.';
   appendMessage('ai', msg);
 }
 
@@ -213,10 +213,10 @@ function updateHUD(nodeId) {
   document.getElementById('yaw-text').textContent = node.yaw_deg === 180 ? '180° 유턴' : `Yaw ${node.yaw_deg}°`;
 
   const statusMap = {
-    'safe_guide': '정상 경로 안내 중',
-    'off_route_warning': '🚨 경로 이탈! 긴급 재탐색',
-    'final_approach': '목적지 근접 (3분 전)',
-    'arrived_building': '✅ 목적지 건물 진입 완료'
+    'safe_guide': '안내 중',
+    'off_route_warning': '이탈 복구',
+    'final_approach': '목적지 근접',
+    'arrived_building': '도착 완료'
   };
   document.getElementById('hud-status').textContent = statusMap[alertLevel] || '안내 중';
 
@@ -288,14 +288,14 @@ function buildPersonaReply(node, routeState, routePath, nextNodeInfo) {
     ? '🚨 경로 이탈이 감지되어 즉시 원래 경로로 재탐색합니다.'
     : '✅ 정상 경로를 유지하고 있습니다.';
 
-  const routeHint = `📍 경로상 다음 목적지는 ${nextNodeInfo.name}입니다. 현재 경로: ${routePath.join(' → ')}.`;
+  const routeHint = `📍 다음: ${nextNodeInfo.name}.`;
 
   if (currentPersona === 'mak') {
     return `${node.guide_mak} ${rerouteMessage} ${routeHint}`;
   }
 
-  const shortModeSummary = `최단 경로 유지 중입니다. ${nextNodeInfo.name} 방향으로 이동하세요.`;
-  return `${node.guide_gil} ${shortModeSummary} ${routeHint}`;
+  const shortCaseSummary = `최단 경로로 안내 중입니다. ${nextNodeInfo.name} 쪽으로 이동하세요.`;
+  return `${node.guide_gil} ${shortCaseSummary} ${routeHint}`;
 }
 
 function processQuery(text) {
@@ -334,10 +334,38 @@ function processQuery(text) {
   }, 300);
 }
 
+function setInputStatus(state, text) {
+  const statusEl = document.getElementById('input-status');
+  const buttonEl = document.getElementById('submit-button');
+  if (!statusEl || !buttonEl) return;
+
+  statusEl.className = `input-status ${state}`;
+  statusEl.textContent = text;
+
+  if (state === 'success') {
+    buttonEl.classList.add('submitted');
+    setTimeout(() => buttonEl.classList.remove('submitted'), 500);
+  }
+}
+
 function handleUserSubmit() {
   const input = document.getElementById('user-input');
-  processQuery(input.value);
+  const text = input.value.trim();
+
+  if (!text) {
+    setInputStatus('warning', '입력');
+    input.focus();
+    return;
+  }
+
+  processQuery(text);
   input.value = '';
+  setInputStatus('success', '전송');
+  const userMessage = document.querySelector('.message.user:last-child');
+  if (userMessage) {
+    userMessage.classList.add('sent');
+    setTimeout(() => userMessage.classList.remove('sent'), 700);
+  }
 }
 
 function handleKeyPress(e) {
@@ -345,7 +373,9 @@ function handleKeyPress(e) {
 }
 
 function sendPreset(text) {
-  processQuery(text);
+  const input = document.getElementById('user-input');
+  input.value = text;
+  handleUserSubmit();
 }
 
 window.onload = initApp;
