@@ -1,0 +1,289 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif;
+}
+
+body {
+  background-color: #0f172a;
+  color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 480px;
+  background-color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* 헤더 */
+.app-header {
+  padding: 16px;
+  background-color: #0f172a;
+  border-bottom: 1px solid #334155;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge-live {
+  font-size: 10px;
+  font-weight: 700;
+  background: #3b82f6;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.title-group h1 {
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.persona-switch {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.persona-btn {
+  background: #334155;
+  color: #cbd5e1;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.persona-btn.active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* HUD 패널 */
+.hud-panel {
+  margin: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+  transition: all 0.3s ease;
+}
+
+.hud-panel.off_route_warning {
+  background: linear-gradient(135deg, #7f1d1d, #dc2626);
+  animation: pulseWarning 1.5s infinite;
+}
+
+.hud-panel.arrived_building {
+  background: linear-gradient(135deg, #065f46, #059669);
+}
+
+@keyframes pulseWarning {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.6); }
+  70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+.hud-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+.hud-tag {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.hud-status-badge {
+  font-weight: 700;
+}
+
+.hud-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.compass-box {
+  width: 68px;
+  height: 68px;
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.arrow-indicator {
+  font-size: 24px;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.yaw-text {
+  font-size: 10px;
+  color: #e2e8f0;
+  margin-top: 2px;
+}
+
+.four-word-box {
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fde047;
+  margin-bottom: 4px;
+}
+
+.location-info h2 {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.trap-text {
+  font-size: 12px;
+  color: #fef08a;
+}
+
+/* 채팅 영역 */
+.chat-box {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.message.user {
+  align-self: flex-end;
+  background-color: #3b82f6;
+  color: #fff;
+  border-bottom-right-radius: 2px;
+}
+
+.message.ai {
+  align-self: flex-start;
+  background-color: #334155;
+  color: #f1f5f9;
+  border-bottom-left-radius: 2px;
+}
+
+.message.ai .meta {
+  font-size: 11px;
+  color: #93c5fd;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* 빠른 시나리오 버튼 */
+.quick-prompts {
+  padding: 8px 12px;
+  background-color: #0f172a;
+  border-top: 1px solid #334155;
+}
+
+.quick-label {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.chip-container {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.chip {
+  background: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  padding: 5px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.chip.warning {
+  border-color: #ef4444;
+  color: #fca5a5;
+}
+
+.chip.success {
+  border-color: #10b981;
+  color: #6ee7b7;
+}
+
+/* 입력창 */
+.chat-input-area {
+  display: flex;
+  padding: 10px 12px;
+  background: #0f172a;
+  gap: 8px;
+}
+
+.chat-input-area input {
+  flex: 1;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.chat-input-area button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* JSON 인스펙터 */
+.json-inspector {
+  background: #020617;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: #38bdf8;
+  border-top: 1px solid #1e293b;
+}
+
+.json-inspector pre {
+  margin-top: 8px;
+  max-height: 120px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>코엑스 실내 길라잡이 AI - AMD 행사장 데모</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- 상단 헤더 및 페르소나 스위처 -->
+    <header class="app-header">
+      <div class="title-group">
+        <span class="badge-live">IMDF LIVE DEMO</span>
+        <h1>실내 길라잡이 AI</h1>
+        <p class="subtitle">삼성역 → 웨스틴 서울 파르나스 (AMD 행사장)</p>
+      </div>
+      <div class="persona-switch">
+        <button id="btn-mak" class="persona-btn active" onclick="setPersona('mak')">막해일 (이탈보정)</button>
+        <button id="btn-gil" class="persona-btn" onclick="setPersona('gil')">길라임 (최단주파)</button>
+      </div>
+    </header>
+
+    <!-- 실시간 3D 방향 HUD 카드 -->
+    <section id="hud-panel" class="hud-panel safe_guide">
+      <div class="hud-top">
+        <span id="hud-level" class="hud-tag">B1 · 코엑스몰 지하 1층</span>
+        <span id="hud-status" class="hud-status-badge">정상 경로 안내 중</span>
+      </div>
+
+      <div class="hud-main">
+        <div class="compass-box">
+          <div id="arrow-indicator" class="arrow-indicator">▲</div>
+          <span id="yaw-text" class="yaw-text">Yaw 28° · 직진</span>
+        </div>
+        <div class="location-info">
+          <div class="four-word-box" id="four-word-address">///지하삼성.광장개방.우상에스컬.일시직진</div>
+          <h2 id="current-node-name">밀레니엄 광장 입구 (삼성역 연결)</h2>
+          <p id="trap-warning" class="trap-text">⚠️ 우측 파르나스몰(opn-sam-03) 오진입 주의</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 대화형 길찾기 채팅 영역 -->
+    <main id="chat-box" class="chat-box"></main>
+
+    <!-- 데모 시연용 빠른 발화 칩 -->
+    <section class="quick-prompts">
+      <p class="quick-label">🎬 시연 시나리오 원클릭 테스트:</p>
+      <div class="chip-container">
+        <button class="chip" onclick="sendPreset('막해일은 방금 삼성역에서 들어왔는데 길 잃었어. AMD 행사장 길 찾아줘')">1. 삼성역 진입</button>
+        <button class="chip warning" onclick="sendPreset('파르나스라서 와보니 파르나스 타워인데')">2. 파르나스 타워 오진입</button>
+        <button class="chip" onclick="sendPreset('별마당 도서관 앞이야')">3. 별마당 도서관</button>
+        <button class="chip" onclick="sendPreset('아쿠아 입구까지 왔는데 어디로 가야 하지')">4. 아쿠아리움 입구</button>
+        <button class="chip success" onclick="sendPreset('파르나스 로비 앞으로 나와버렸어 어쩌지')">5. 호텔 로비 도착</button>
+      </div>
+    </section>
+
+    <!-- 사용자 직접 입력창 -->
+    <footer class="chat-input-area">
+      <input type="text" id="user-input" placeholder="현재 보이는 간판이나 위치를 입력하세요..." onkeypress="handleKeyPress(event)" />
+      <button onclick="handleUserSubmit()">전송</button>
+    </footer>
+
+    <!-- IMDF JSON 출력 인스펙터 (토글) -->
+    <details class="json-inspector">
+      <summary>🔍 실시간 AI 응답 & Apple IMDF JSON 데이터 보기</summary>
+      <pre id="json-output">{}</pre>
+    </details>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

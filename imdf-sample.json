@@ -1,0 +1,75 @@
+{
+  "imdf_version": "1.0.0",
+  "venue": {
+    "id": "ven-coex-parnas-001",
+    "name": "스타필드 코엑스몰 & 웨스틴 서울 파르나스 복합단지",
+    "category": "shoppingcenter",
+    "address": "서울특별시 강남구 영동대로 513"
+  },
+  "levels": [
+    { "id": "lvl-coex-b1", "ordinal": -1, "name": "코엑스몰 지하 1층 (B1)", "short_name": "B1" },
+    { "id": "lvl-westin-1f", "ordinal": 1, "name": "웨스틴 서울 파르나스 로비 및 연회장층", "short_name": "1F/연회장" }
+  ],
+  "nodes": {
+    "opn-sam-01": {
+      "feature_type": "opening",
+      "name": "밀레니엄 광장 입구 (삼성역 5·6번 출구 연결)",
+      "level_id": "lvl-coex-b1",
+      "four_word": "///지하삼성.광장개방.우상에스컬.일시직진",
+      "yaw_deg": 28,
+      "pitch_deg": 0,
+      "alert_level": "safe_guide",
+      "trap_warning": "우측 파르나스몰(opn-sam-03) 오진입 주의",
+      "guide_mak": "당황하지 마세요! 방금 삼성역에서 들어오셨다면 밀레니엄 광장입니다. 우측 파르나스몰로 빠지지 마시고, 정면 1시 방향 코엑스몰 메인 통로(별마당 도서관 방향)로 직진하세요.",
+      "guide_gil": "밀레니엄 광장 통과 완료. 정면 1시 방향 스타필드 코엑스몰 중앙 게이트로 직진합니다. (목적지까지 11분)"
+    },
+    "opn-sam-03": {
+      "feature_type": "opening",
+      "name": "파르나스몰 / 파르나스 타워 지하 연결구 (이탈 함정)",
+      "level_id": "lvl-coex-b1",
+      "four_word": "///지하남측.상가회랑.파르나스분기.후방유턴",
+      "yaw_deg": 180,
+      "pitch_deg": 0,
+      "alert_level": "off_route_warning",
+      "trap_warning": "파르나스 타워 오진입 감지! 180° 후방 유턴 필요",
+      "guide_mak": "아이고, 파르나스 타워 쪽으로 잘못 들어오셨어요! 행사장(웨스틴 서울 파르나스)은 반대편 북쪽에 있습니다. 지금 자리에서 뒤로 돌아 밀레니엄 광장으로 다시 나오신 뒤 코엑스몰 중앙 통로로 진입하세요.",
+      "guide_gil": "해당 경로는 이탈 구역입니다. 길라임 경로에서는 진입하지 않습니다."
+    },
+    "opn-central-starfield": {
+      "feature_type": "unit",
+      "name": "별마당 도서관 (센트럴플라자)",
+      "level_id": "lvl-coex-b1",
+      "four_word": "///중앙광장.사방개방.보이드서가.십일시돌파",
+      "yaw_deg": 345,
+      "pitch_deg": 0,
+      "alert_level": "safe_guide",
+      "trap_warning": "중앙 에스컬레이터(1층 상승) 탑승 금지",
+      "guide_mak": "별마당 도서관에 잘 도착하셨습니다! 에스컬레이터를 타지 마시고 대형 서가를 기준으로 11시 방향(아셈플라자·아쿠아리움 방면) 통로로 계속 직진하세요.",
+      "guide_gil": "별마당 도서관 11시 방향 북측 회랑 직진 통과. (잔여 시간 6분)"
+    },
+    "unt-aquarium-entrance": {
+      "feature_type": "unit",
+      "name": "코엑스 아쿠아리움 입구 (북측 회랑)",
+      "level_id": "lvl-coex-b1",
+      "four_word": "///지하북측.수족관앞.아셈광장향.우측연결",
+      "yaw_deg": 45,
+      "pitch_deg": 0,
+      "alert_level": "final_approach",
+      "trap_warning": "봉은사역 개찰구(opn-bon-01) 직진 지나침 주의",
+      "guide_mak": "거의 다 오셨습니다! 아쿠아리움 입구에서 봉은사역 방향으로 40m만 더 직진하면 아셈플라자가 나옵니다. 봉은사역 개찰구로 내려가지 마시고 아셈플라자 우측 웨스틴 서울 파르나스 연결 통로로 우회전하세요.",
+      "guide_gil": "아쿠아리움 통과 후 아셈플라자 우측 호텔 지하 연결 통로 진입. (잔여 시간 3분)"
+    },
+    "opn-westin-lobby": {
+      "feature_type": "opening",
+      "name": "웨스틴 서울 파르나스 로비 진입부",
+      "level_id": "lvl-westin-1f",
+      "four_word": "///호텔로비.정면안내.연회장에스컬.이층상승",
+      "yaw_deg": 15,
+      "pitch_deg": 30,
+      "alert_level": "arrived_building",
+      "trap_warning": "프론트 데스크가 아닌 연회장(Banquet) 표지판 이용",
+      "guide_mak": "축하합니다! 정확한 건물에 도착하셨어요. 프론트 데스크로 가지 마시고, 로비 안쪽 연회장 표지판을 따라 전용 에스컬레이터를 타고 올라가시면 바로 하모니 볼룸 AMD 행사장입니다.",
+      "guide_gil": "웨스틴 서울 파르나스 도착. 연회장 전용 에스컬레이터 탑승 후 하모니 볼룸(AMD 행사장) 도착 완료."
+    }
+  }
+}
